@@ -15,6 +15,11 @@ source env/bin/activate
 ```
 pip install -r requirements.txt
 ```
+## Create environment variable
+```
+cp .env.dev.example .env
+```
+> adjust the value based on your saved machine learning model directory
 ## Run application
 ```
 python3 app.py

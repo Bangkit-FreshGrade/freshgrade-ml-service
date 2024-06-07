@@ -6,6 +6,10 @@ from pydantic import BaseModel
 from typing import List
 from contextlib import asynccontextmanager
 from load import load_condition_model, load_disease_model
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 model = {}
 
@@ -44,4 +48,8 @@ async def predictDisease(req: input_tensor):
     return JSONResponse(content={"predictions": predictions.tolist()})
     
 if __name__ == '__main__':
-    uvicorn.run(app, host='localhost', port=7777)
+    env = os.getenv("ENV", "development")
+    if env == 'development':
+      uvicorn.run(app, host='localhost', port=7777)
+    else:
+      uvicorn.run(app, host='0.0.0.0', port=80)

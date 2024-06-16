@@ -6,8 +6,6 @@ ENV CONDITION_MODEL=gs://freshgrade-model/condition/freshness_condition.h5
 
 ENV DISEASE_MODEL=gs://freshgrade-model/disease/fruit_disease.h5
 
-ENV PORT=7777
-
 COPY ./requirements.txt .
 
 RUN pip install --no-cache-dir --upgrade -r requirements.txt

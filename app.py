@@ -27,6 +27,10 @@ class input_tensor(BaseModel):
     # array 4D based on input from backend server
     array: List[List[List[List[float]]]]
 
+@app.get("/")
+async def welcome():
+    return JSONResponse(content={"message": "Freshgrade machine learning service for predict fruit conditions and diseases"})
+
 @app.post("/predict/condition")
 async def predictCondition(req: input_tensor):
     tensor_array = np.array(req.array)
@@ -48,8 +52,4 @@ async def predictDisease(req: input_tensor):
     return JSONResponse(content={"predictions": predictions.tolist()})
     
 if __name__ == '__main__':
-    env = os.getenv("ENV", "development")
-    if env == 'development':
-      uvicorn.run(app, host='localhost', port=7777)
-    else:
-      uvicorn.run(app, host='0.0.0.0', port=80)
+    uvicorn.run(app, host='localhost', port=7777)
